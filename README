@@ -1,0 +1,49 @@
+INTRODUCTION
+
+    Papertape is a suite of tools inspired by the bcd(1) program that
+    was included in many BSD UNIX distributions. Like bcd(1), the
+    papertape suite generates visual representations of punched paper
+    tape. The papertape suite not only generates an ASCII art
+    representation; it also generates graphical images in PBM (Portable
+    Bitmap) format.
+
+    The author originally wrote this code to generate a graphical
+    representation of punched paper tape as a page banner on his web
+    page. Though that banner is now long gone, this tool suite is
+    released in the hope that it may be useful. The PBM output is a
+    plain monochrome image, but it can be used as a starting point for
+    artistic modifications in tools such as gimp or Photoshop.
+
+SYSTEM REQUIREMENTS
+
+
+COMPILING
+
+     ./configure
+     make
+     make install
+
+DOCUMENTATION
+
+    Documentation is lacking. Some help is available by invoking each
+    tool with "-h" or any other illegal option.
+
+AUTHOR
+
+     Mark J. Blair, NF6X <nf6x@nf6x.net>
+
+COPYRIGHT
+
+    Papertape is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+ 
+    Papertape is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+ 
+    You should have received a copy of the GNU General Public License
+    along with Papertape.  If not, see <http://www.gnu.org/licenses/>.
+

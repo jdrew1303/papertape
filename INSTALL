@@ -1,0 +1,10 @@
+COMPILING
+
+    ./configure
+    make
+
+INSTALLATION
+
+    make install
+
+
