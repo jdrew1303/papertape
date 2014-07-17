@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT([papertape], [1.0], [nf6x@nf6x.net], [papertape], [http://www.nf6x.net/tag/papertape])
+AC_INIT([papertape], [1.1], [nf6x@nf6x.net], [papertape], [http://www.nf6x.net/tag/papertape])
 AC_CONFIG_SRCDIR([pbmtape.cc])
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_AUX_DIR([build-aux])

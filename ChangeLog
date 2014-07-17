@@ -1,3 +1,8 @@
+1.1:
+	Added pt_tape2txt utility to convert text source code tapes to
+	plain text by ignoring NUL bytes (i.e., tape leader) and clearing
+	the most significant bit.
+
 1.0:
 	First release of papertape suite.
 
