@@ -21,8 +21,6 @@
  * \file
  * \brief Main entry point of papertape text converter executable.
  *
- * Utility for converting typical PDP-8/etc. text source tapes to plain
- * text. Clears most significant bit, and ignores NULs (i.e., tape leader).
  */ 
 
 
@@ -37,19 +35,19 @@ void PrintHelp(ostream& os) {
     os << "Copyright (C) 2014 Mark J. Blair. Released under GPLv3" << endl;
     os << endl;
     os << "Usage:" << endl;
-    os << "  pt_tape2txt [-v] <file1>"
+    os << "  pt_setmsb [-v] <file1>"
        << endl;
     os << endl;
     os << "Description:" << endl;
-    os << "  pt_tape2txt reads data from an input file, ignores NUL bytes," <<endl;
-    os << "  clears the most significant bit, and outputs the resulting" << endl;
-    os << "  data to stdout." << endl;
-    os << "  If the input filename is not specified, then input will be read from stdin." <<     os << endl;
+    os << "  pt_setmsb reads data from an input file, sets the most significant," <<endl;
+    os << "  bit, and outputs the resulting data to stdout." << endl;
+    os << "  NUL bytes in input stream are passed through unmodified." << endl;
+    os << "  If the input filename is not specified, then input will be read from stdin." << endl;
+    os << endl;
     os << "Options:" << endl;
     os << "  -v: Verbose mode. Informational messages will be printed to stderr." << endl;
     os << endl;
 }
-
 
 
 int process_data(istream &in, ostream &out) {
@@ -60,9 +58,13 @@ int process_data(istream &in, ostream &out) {
     while (in.good()) {
 	c = (unsigned char)in.get();
 
-	if (in.good() && (c != 0x00)) {
+	if (in.good()) {
 	    ++StreamLen;
-	    out.put(c & 0x7F);
+	    if (c == 0x00) {
+		out.put(c);
+	    } else {
+		out.put(c | 0x80);
+	    }
 	}
     }
     return StreamLen;
@@ -74,7 +76,6 @@ int process_data(istream &in, ostream &out) {
 int main(int argc, char **argv)
 {
     int			opt;		        // used for arg parsing
-    unsigned char	c1;			// input character
     ifstream		in1;			// input stream
     bool		Verbose = false;	// verbose mode
     int			StreamLen = 0;		// length of output stream

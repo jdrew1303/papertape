@@ -79,7 +79,7 @@ POST_UNINSTALL = :
 bin_PROGRAMS = pt_render$(EXEEXT) pt_asc2baudot$(EXEEXT) \
 	pt_marquee$(EXEEXT) pt_and$(EXEEXT) pt_or$(EXEEXT) \
 	pt_invert$(EXEEXT) pt_xor$(EXEEXT) pt_random$(EXEEXT) \
-	pt_tape2txt$(EXEEXT)
+	pt_tape2txt$(EXEEXT) pt_setmsb$(EXEEXT)
 subdir = .
 DIST_COMMON = INSTALL NEWS README AUTHORS ChangeLog \
 	$(srcdir)/Makefile.in $(srcdir)/Makefile.am \
@@ -122,6 +122,9 @@ pt_random_LDADD = $(LDADD)
 am_pt_render_OBJECTS = pt_render.$(OBJEXT) pbmtape.$(OBJEXT)
 pt_render_OBJECTS = $(am_pt_render_OBJECTS)
 pt_render_LDADD = $(LDADD)
+am_pt_setmsb_OBJECTS = pt_setmsb.$(OBJEXT)
+pt_setmsb_OBJECTS = $(am_pt_setmsb_OBJECTS)
+pt_setmsb_LDADD = $(LDADD)
 am_pt_tape2txt_OBJECTS = pt_tape2txt.$(OBJEXT)
 pt_tape2txt_OBJECTS = $(am_pt_tape2txt_OBJECTS)
 pt_tape2txt_LDADD = $(LDADD)
@@ -171,11 +174,11 @@ am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(pt_and_SOURCES) $(pt_asc2baudot_SOURCES) \
 	$(pt_invert_SOURCES) $(pt_marquee_SOURCES) $(pt_or_SOURCES) \
-	$(pt_random_SOURCES) $(pt_render_SOURCES) \
+	$(pt_random_SOURCES) $(pt_render_SOURCES) $(pt_setmsb_SOURCES) \
 	$(pt_tape2txt_SOURCES) $(pt_xor_SOURCES)
 DIST_SOURCES = $(pt_and_SOURCES) $(pt_asc2baudot_SOURCES) \
 	$(pt_invert_SOURCES) $(pt_marquee_SOURCES) $(pt_or_SOURCES) \
-	$(pt_random_SOURCES) $(pt_render_SOURCES) \
+	$(pt_random_SOURCES) $(pt_render_SOURCES) $(pt_setmsb_SOURCES) \
 	$(pt_tape2txt_SOURCES) $(pt_xor_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
@@ -323,6 +326,7 @@ pt_invert_SOURCES = pt_invert.cc papertape.h
 pt_xor_SOURCES = pt_xor.cc papertape.h
 pt_random_SOURCES = pt_random.cc papertape.h
 pt_tape2txt_SOURCES = pt_tape2txt.cc papertape.h
+pt_setmsb_SOURCES = pt_setmsb.cc papertape.h
 EXTRA_DIST = ECMA-10.pdf
 CLEANFILES = *~
 all: config.h
@@ -450,6 +454,10 @@ pt_render$(EXEEXT): $(pt_render_OBJECTS) $(pt_render_DEPENDENCIES) $(EXTRA_pt_re
 	@rm -f pt_render$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(pt_render_OBJECTS) $(pt_render_LDADD) $(LIBS)
 
+pt_setmsb$(EXEEXT): $(pt_setmsb_OBJECTS) $(pt_setmsb_DEPENDENCIES) $(EXTRA_pt_setmsb_DEPENDENCIES) 
+	@rm -f pt_setmsb$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(pt_setmsb_OBJECTS) $(pt_setmsb_LDADD) $(LIBS)
+
 pt_tape2txt$(EXEEXT): $(pt_tape2txt_OBJECTS) $(pt_tape2txt_DEPENDENCIES) $(EXTRA_pt_tape2txt_DEPENDENCIES) 
 	@rm -f pt_tape2txt$(EXEEXT)
 	$(AM_V_CXXLD)$(CXXLINK) $(pt_tape2txt_OBJECTS) $(pt_tape2txt_LDADD) $(LIBS)
@@ -472,6 +480,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pt_or.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pt_random.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pt_render.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pt_setmsb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pt_tape2txt.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pt_xor.Po@am__quote@
 
