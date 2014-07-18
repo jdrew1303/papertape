@@ -5,6 +5,9 @@ bin_PROGRAMS  = pt_render pt_asc2baudot pt_marquee
 bin_PROGRAMS += pt_and pt_or pt_invert pt_xor pt_random
 bin_PROGRAMS += pt_tape2txt pt_setmsb
 
+dist_bin_SCRIPTS = pt_tapein.py
+
+
 pt_render_SOURCES  = pt_render.cc pbmtape.cc papertape.h
 
 pt_asc2baudot_SOURCES = pt_asc2baudot.cc papertape.h

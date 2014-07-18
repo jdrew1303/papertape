@@ -41,7 +41,7 @@ void PrintHelp(ostream& os) {
        << endl;
     os << endl;
     os << "Description:" << endl;
-    os << "  pt_tape2txt reads data from an input file, ignores NUL bytes," <<endl;
+    os << "  pt_tape2txt reads data from an input file, ignores NUL and DEL bytes," <<endl;
     os << "  clears the most significant bit, and outputs the resulting" << endl;
     os << "  data to stdout." << endl;
     os << "  If the input filename is not specified, then input will be read from stdin." <<     os << endl;
@@ -60,9 +60,14 @@ int process_data(istream &in, ostream &out) {
     while (in.good()) {
 	c = (unsigned char)in.get();
 
-	if (in.good() && (c != 0x00)) {
-	    ++StreamLen;
-	    out.put(c & 0x7F);
+	if (in.good()) {
+	    if ((c != 0x00)) {
+		c &= 0x7F;
+		if (c != 0x7F) {
+		    ++StreamLen;
+		    out.put(c);
+		}
+	    }
 	}
     }
     return StreamLen;
