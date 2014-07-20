@@ -1,32 +1,40 @@
 INTRODUCTION
 
-    Papertape is a suite of tools inspired by the bcd(1) program that
-    was included in many BSD UNIX distributions. Like bcd(1), the
-    papertape suite generates visual representations of punched paper
-    tape. The papertape suite not only generates an ASCII art
-    representation; it also generates graphical images in PBM (Portable
-    Bitmap) format.
+    Papertape allows creation and manipulation of punched paper tape
+    image files, for use with vintage computer and teletype systems.
+    It is written in Python, and provides both a Python package and
+    various utility scripts.
 
-    The author originally wrote this code to generate a graphical
-    representation of punched paper tape as a page banner on his web
-    page. Though that banner is now long gone, this tool suite is
-    released in the hope that it may be useful. The PBM output is a
-    plain monochrome image, but it can be used as a starting point for
-    artistic modifications in tools such as gimp or Photoshop.
+    The primary utility script for image manipulation is tapeutil.py.
+    Invoke tapeutil.py with the '-h' or '--help' option for
+    instructions.
+
+    Other utilities allow communication with paper tape reader and
+    punching hardware.
 
 SYSTEM REQUIREMENTS
 
+    Any system with a compatible Python installation should be able to
+    run tapeutil.py. Papertape was developed and tested under Python
+    2.7.
 
-COMPILING
+    The tapein.py script may not work on Windows systems because of
+    their different handling of ^C signaling.
+     
 
-     ./configure
-     make
-     make install
+INSTALLATION
 
-DOCUMENTATION
+    Use the setup.py script to install papertape. Here are some usage
+    examples:
 
-    Documentation is lacking. Some help is available by invoking each
-    tool with "-h" or any other illegal option.
+    Install in your user directory:
+        ./setup.py install --user
+
+    Install in the system default location:
+        sudo ./setup.py install
+
+    Install under /usr/local:
+        sudo ./setup.py install --prefix /usr/local
 
 AUTHOR
 

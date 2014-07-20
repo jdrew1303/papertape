@@ -1,3 +1,7 @@
+2.0:
+	Complete re-write in Python, now targeting creation and manipulation
+	of paper tape images for computer and teletype applications.
+
 1.1:
 	Added pt_tape2txt utility to convert text source code tapes to
 	plain text by ignoring NUL bytes (i.e., tape leader) and clearing

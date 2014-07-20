@@ -1,10 +1,13 @@
-COMPILING
-
-    ./configure
-    make
-
 INSTALLATION
 
-    make install
+    Use the setup.py script to install papertape. Here are some usage
+    examples:
 
+    Install in your user directory:
+        ./setup.py install --user
 
+    Install in the system default location:
+        sudo ./setup.py install
+
+    Install under /usr/local:
+        sudo ./setup.py install --prefix /usr/local
