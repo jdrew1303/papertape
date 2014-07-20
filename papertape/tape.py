@@ -180,6 +180,21 @@ class tape(bytearray):
         self.extend(chr(char)*length)
 
 
+    def pad_crlf(self):
+        '''Add two DEL chars after each CR-LF sequence.'''
+
+        if len(self) > 1:
+            buf = bytearray()
+            buf.append(self[0])
+            for n in range(1, len(self)):
+                buf.append(self[n])
+                if (self[n] == 0x0A) and (self[n-1] == 0x0D):
+                    buf.append(0x7F)
+                    buf.append(0x7F)
+            self.clear()
+            self.extend(buf)
+
+
     def add_title(self, title, rotate=False, invert=False):
         '''Add a human-readable title to the beginning of the buffer.'''
         

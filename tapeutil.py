@@ -239,6 +239,9 @@ if __name__ == '__main__':
         elif cmd == 'clear_msb':
             tapebuf.clear_msb()
 
+        elif cmd == 'pad_crlf':
+            tapebuf.pad_crlf()
+
         elif cmd == 'title':
             tapebuf.add_title(title=opt[0], rotate=False, invert=False)
 
