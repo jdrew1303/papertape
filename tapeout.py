@@ -19,7 +19,7 @@
 #  along with py  If not, see <http://www.gnu.org/licenses/>.
 ##########################################################################
 
-'''Read in tape from reader/punch over serial interface.'''
+'''Send tape to reader/punch over serial interface.'''
 
 import sys
 import signal
@@ -29,21 +29,14 @@ import textwrap
 import papertape
 
 
-def ctrlc_handler(signum, frame):
-    '''Handler to be called when user presses ^C.'''
-    print ''
-    print 'Done!'
-    sys.exit(0)
-
-
 # Main entry point when called as an executable script.
 if __name__ == '__main__':
 
     # Set up the command-line argument parser
     parser = argparse.ArgumentParser(
-        prog='tapein.py',
+        prog='tapeout.py',
         description=textwrap.dedent('''\
-        Punched paper tape reader utility version {:s}
+        Punched paper tape writer utility version {:s}
           {:s}
           {:s}
           {:s}\
@@ -55,46 +48,41 @@ if __name__ == '__main__':
 
     parser.add_argument('--baud', action='store', nargs=1,
                         metavar='BAUD', default=[4800], type=int,
-                        help='''Specify baud rate for tape reader input.
+                        help='''Specify baud rate for tape punch output.
                         Defaults to 4800.''')
 
     parser.add_argument('port', action='store', nargs=1,
                         metavar='PORT',
-                        help='Serial port for tape reader input.')
+                        help='Serial port for tape punch output.')
 
     parser.add_argument('file', action='store', nargs=1,
                         metavar='FILENAME',
-                        help='Output file name.')
+                        help='Input file name.')
 
     # Parse the command-line arguments.
     args = parser.parse_args()
 
 
-    # Open the tape reader serial port.
+    # Open the tape punch serial port.
     try:
-        reader = serial.Serial(port=args.port[0], baudrate=args.baud[0],
+        punch = serial.Serial(port=args.port[0], baudrate=args.baud[0],
                                bytesize=serial.EIGHTBITS,
                                parity=serial.PARITY_NONE, timeout=None, xonxoff=False,
-                               rtscts=True, dsrdtr=False)
+                               rtscts=True, dsrdtr=True)
     except:
-        print reader
+        print punch
         sys.stderr.write('Error opening port.')
 
-    outfile = open(args.file[0], 'wb')
-
-
-    print 'Start reader; press ^C to end capture.'
-
-    signal.signal(signal.SIGINT, ctrlc_handler)
+    infile = open(args.file[0], 'rb')
 
     count = 0
 
-    while True:
-        c = reader.read(1)
-        outfile.write(c)
-        outfile.flush()
+    for c in infile.read():
+        punch.write(c)
         sys.stdout.write('{:02X} '.format(ord(c)))
         if (count % 16) == 15:
             sys.stdout.write('\n')
         count = count + 1
         sys.stdout.flush()
+
+    sys.stdout.write('\n')

@@ -32,7 +32,8 @@ Usage examples:
         sudo ./setup.py install
 
     Install under /usr/local:
-        sudo ./setup.py install --prefix /usr/local'''
+        sudo ./setup.py install --prefix /usr/local
+'''
 
 
 from distutils.core import setup
@@ -47,5 +48,5 @@ setup(name          = 'papertape',
       download_url  = __dl_url__,
       license       = 'GPLv3',
       packages      = ['papertape'],
-      scripts       = ['tapeutil.py', 'tapein.py'])
+      scripts       = ['tapeutil.py', 'tapein.py', 'tapeout.py'])
 

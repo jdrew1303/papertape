@@ -27,7 +27,7 @@ import textwrap
 import papertape
 
 
-# Accumulate arguments in order specified
+# Accumulate arguments in order encountered
 class gather_args(argparse.Action):
     def __call__(self, parser, namespace, values, option_string=None):
         if not 'arg_sequence' in namespace:
