@@ -218,6 +218,14 @@ class tape(bytearray):
             self.insert(0, column)
 
 
+    def reverse_bits(self, numbits=8):
+        '''Reverse the order of numbits least significant bits of
+        each byte in the buffer, discarding more significant bits.'''
+
+        for n in range(len(self)):
+            self[n] = sum(1<<(numbits-1-i) for i in range(numbits) if self[n]>>i&1)
+
+
     def ascii2tty(self):
         '''Convert from ASCII to 5-level TTY code.
 
