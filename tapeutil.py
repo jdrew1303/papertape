@@ -146,6 +146,10 @@ if __name__ == '__main__':
                         will be right side up on machines like the Teletype 33 ASR,
                         but inverted on tapes following ECMA-10 standard.''')
 
+    parser.add_argument('--mask5', action=gather_args, nargs=0,
+                        help='''Mask lower 5 bits of entire buffer in order to clear MSBs
+                        of a 5-level tape read on an 8 bit reader.''')
+
     parser.add_argument('--ascii2tty', action=gather_args, nargs=0,
                         help='Translate entire buffer from ASCII to 5-level TTY coding.')
 
@@ -253,6 +257,9 @@ if __name__ == '__main__':
 
         elif cmd == 'rot_inv_title':
             tapebuf.add_title(title=opt[0], rotate=True, invert=True)
+
+        elif cmd == 'mask5':
+            tapebuf.and_buf(0x1F)
 
         elif cmd == 'ascii2tty':
             tapebuf.ascii2tty()
